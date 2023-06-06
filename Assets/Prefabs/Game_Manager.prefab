@@ -44,3 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819bfe3f12a23664297ac6ede18fa0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _redBallsLeft: []
+  _allTilesCollected: 0
+  _redBallsDestroyed: 0
+  _isPoCollected: 0
+  _isRoCollected: 0
+  _isToCollected: 0
+  ammoPreReset: 0
+  _currentScene: 0
+  _powerUpDuration: 15
+  _ballPrefab: {fileID: 0}
+  rainSpawnPoints:
+  - {fileID: 0}

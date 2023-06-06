@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private float _jumpForce = 10.0f;
+    public float _jumpForce = 10.0f;
     [SerializeField] 
     private bool _grounded = false;
     private Rigidbody2D _rigid;

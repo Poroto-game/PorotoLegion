@@ -17,7 +17,7 @@ public class PorotoTiles : MonoBehaviour
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>(); //Connection to the Player Script
         if (_gameManager == null)
         {
-            Debug.LogError("_player is NULL");
+            Debug.LogError("Game Manager is NULL");
         }
         
 

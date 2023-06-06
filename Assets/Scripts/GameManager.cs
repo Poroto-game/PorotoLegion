@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 //public class GameManager : MonoBehaviour
 public class GameManager: MonoBehaviour
@@ -25,6 +26,11 @@ public class GameManager: MonoBehaviour
     public bool _isToCollected;
     public int ammoPreReset;
     public int _currentScene;
+    private Player _player;
+    [SerializeField]
+    private float _powerUpDuration = 15.0f;
+    public GameObject _ballPrefab;
+    public Transform[] rainSpawnPoints;
 
 
     public void Start()
@@ -41,6 +47,8 @@ public class GameManager: MonoBehaviour
         AddAmmo(10);
         ammoPreReset = ammo;
         _currentScene = SceneManager.GetActiveScene().buildIndex;
+
+        _player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     public void Update()
@@ -156,7 +164,46 @@ public class GameManager: MonoBehaviour
             AddAmmo(15); 
             AllTilesCollected(); //evaluate if this could be used elsewhere
         }
-
     }
+
+    public void ActivateHighJump()
+    {
+        _player._jumpForce = 25.0f;
+        Debug.LogError("High Jump Activated");
+        StartCoroutine(CancelHighJump());
+    }
+
+    public void ActivateMakeItRain()
+    {
+        Instantiate(_ballPrefab, rainSpawnPoints[0].transform.position,transform.rotation);
+        Instantiate(_ballPrefab, rainSpawnPoints[1].transform.position, transform.rotation);
+        Instantiate(_ballPrefab, rainSpawnPoints[2].transform.position, transform.rotation);
+        Instantiate(_ballPrefab, rainSpawnPoints[3].transform.position, transform.rotation);
+        Instantiate(_ballPrefab, rainSpawnPoints[4].transform.position, transform.rotation);
+        Debug.LogError("Make It Rain Activated");
+    }
+
+    public void ActivateHighSpeed()
+    {
+        _player.horizontalDampingBasic = 0.3f;
+        Debug.LogError("High Speed Activated");
+        StartCoroutine(RestoreSpeed());
+    }
+
+    IEnumerator CancelHighJump()
+    {
+        yield return new WaitForSeconds(_powerUpDuration);
+        _player._jumpForce = 15.0f;
+        Debug.LogError("Jump Force Restored");
+    }
+
+    IEnumerator RestoreSpeed()
+    {
+        yield return new WaitForSeconds(_powerUpDuration);
+        _player.horizontalDampingBasic = 0.5f;
+        Debug.LogError("Speed Restored");
+    }
+
+
 
 }
