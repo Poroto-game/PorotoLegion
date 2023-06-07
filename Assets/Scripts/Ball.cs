@@ -7,12 +7,16 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private float _ballSpeed = 10.0f;
     private Rigidbody2D _rigid;
+    public float _timer;
+    [SerializeField]
+    private float _selfDestructTime = 30.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
         _rigid.velocity = transform.forward * _ballSpeed; //generally right instead of forward, but character is rotated by 90 degrees
+        _selfDestructTime = 30.0f;
     }
 
     // Update is called once per frame
@@ -23,15 +27,16 @@ public class Ball : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-    }
-    /*void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.tag == "Wall" || collision.transform.tag == "Platform")
+        _timer += Time.deltaTime;
+
+        if (_timer > _selfDestructTime)
         {
-            _ballSpeed = _ballSpeed * 0.4f;
-            _rigid.velocity = transform.forward * _ballSpeed * -1; //generally right instead of forward
-           _ballSpeed = _rigid.velocity.x; 
+            Destroy(this.gameObject, 0.1f);
+            _timer = 0.0f;
         }
 
-    }*/
+
+
+    }
+
 }

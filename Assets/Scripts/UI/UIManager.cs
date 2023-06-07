@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
 
-        if(_currentScene < 5)
+        if(_currentScene < 4)
             _comboSlider.transform.gameObject.SetActive(false);
         else
             _comboSlider.transform.gameObject.SetActive(true);

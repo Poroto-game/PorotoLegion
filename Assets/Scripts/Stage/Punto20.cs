@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Punto20 : MonoBehaviour
 {
@@ -20,11 +21,21 @@ public class Punto20 : MonoBehaviour
         if (collision.transform.tag == "Ball")
         {
             _gameManager.AddScore(20); //Reference to the Player script to call AddScore
-            Destroy(this.gameObject, 0.1f);
+            Gamepad.current.SetMotorSpeeds(0f, 0.2f);
+            StartCoroutine(ResetRumble(0.1f));
+            Destroy(this.gameObject, 0.15f);
             Instantiate(_explosionPrefab, transform.position, transform.rotation);
             _gameManager.AddRedBalls(1);
+
 
         }
 
     }
+
+    IEnumerator ResetRumble(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+    }
+
 }

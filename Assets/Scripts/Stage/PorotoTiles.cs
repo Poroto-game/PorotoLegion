@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 
@@ -34,12 +35,20 @@ public class PorotoTiles : MonoBehaviour
             //Call TIleCollected on Player, passing on Tile Tag         
             _gameManager.TileCollected(transform.tag);
             Instantiate(_explosionPrefab, transform.position, transform.rotation);
-            Destroy(this.gameObject, 0.1f);
+            Gamepad.current.SetMotorSpeeds(1f, 1f);
+            StartCoroutine(ResetRumble(0.1f));
+            Destroy(this.gameObject, 0.2f);
             
 
         }
 
     }
-    
+
+    IEnumerator ResetRumble(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+    }
+
 
 }

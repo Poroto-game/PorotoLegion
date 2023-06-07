@@ -31,6 +31,7 @@ public class GameManager: MonoBehaviour
     private float _powerUpDuration = 15.0f;
     public GameObject _ballPrefab;
     public Transform[] rainSpawnPoints;
+    //public float ballTimer;
 
 
     public void Start()
@@ -179,7 +180,6 @@ public class GameManager: MonoBehaviour
         Instantiate(_ballPrefab, rainSpawnPoints[1].transform.position, transform.rotation);
         Instantiate(_ballPrefab, rainSpawnPoints[2].transform.position, transform.rotation);
         Instantiate(_ballPrefab, rainSpawnPoints[3].transform.position, transform.rotation);
-        Instantiate(_ballPrefab, rainSpawnPoints[4].transform.position, transform.rotation);
         Debug.LogError("Make It Rain Activated");
     }
 

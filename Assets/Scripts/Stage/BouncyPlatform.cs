@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BouncyPlatform : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class BouncyPlatform : MonoBehaviour
         {
             //collision.rigidbody.velocity = new Vector2(collision.rigidbody.velocity.x, _forceMagnitude);
             _player.Jump(0);
+            Gamepad.current.SetMotorSpeeds(0.7f, 0f);
+            StartCoroutine(ResetRumble(0.2f));
         }
         //else
         //{
@@ -46,5 +49,9 @@ public class BouncyPlatform : MonoBehaviour
         
     }
 
-   
+    IEnumerator ResetRumble(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
+    }
 }

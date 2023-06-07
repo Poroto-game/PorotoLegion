@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
@@ -74,17 +76,6 @@ public class Weapon : MonoBehaviour
 
 
 
-    /*void FixedUpdate()
-    {
-        direction = new Vector2(firePoint.transform.rotation.y,firePoint.transform.rotation.x);
-        
-        for(int i =0; i < numberOfPoints; i++)
-        {
-            points[i].transform.position = PointPosition(i * spaceBetweenPoints);
-        }
-    
-    }*/
-
     void Shoot()
     {
         //if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.Joystick1Button5)) && GameManager.ammo > 0)
@@ -94,13 +85,20 @@ public class Weapon : MonoBehaviour
     _audioSource.Play();
     _gameManager.MinusAmmo(1);
     Instantiate(_gunExplosionFX,firePoint.position, firePoint.rotation);
-             
+    Gamepad.current.SetMotorSpeeds(0.7f, 0.7f);
+    StartCoroutine(ResetRumble(0.1f));
     }
 
     Vector2 PointPosition(float time)
     {
         Vector2 position = (Vector2)firePoint.position + (direction * ballForce * time) + 0.3f * Physics2D.gravity * (time * time);
         return position;
+    }
+
+    IEnumerator ResetRumble(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
 
 }
