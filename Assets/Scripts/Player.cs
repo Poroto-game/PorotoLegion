@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     public float horizontalDampingWhenStopping;
     public float horizontalDampingWhenTurning;
     public float horizontalDampingBasic;
+
 
     // Start is called before the first frame update
     void Start()
@@ -71,14 +73,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Flip();
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Joystick1Button0)) && _grounded)
+        if (Time.timeScale > 0f)
         {
-            Jump(_jumpForce);
+            Flip();
+            if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Joystick1Button0)) && _grounded)
+            {
+                Jump(_jumpForce);
+            }
+            CheckForGrounded();
+            CutJump();
+            JumpAnimation();
         }
-        CheckForGrounded();
-        CutJump();
-        JumpAnimation();
     }
 
     private void Flip()

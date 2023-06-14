@@ -31,7 +31,8 @@ public class GameManager: MonoBehaviour
     private float _powerUpDuration = 15.0f;
     public GameObject _ballPrefab;
     public Transform[] rainSpawnPoints;
-    //public float ballTimer;
+    [SerializeField]
+    //private bool _isGamePaused = false;
 
 
     public void Start()
@@ -72,11 +73,6 @@ public class GameManager: MonoBehaviour
             Application.Quit();
         }
 
-        if(Input.GetKeyDown("p"))
-        {
-            //
-        }
-
         if (_isGameOver)
         {
             SceneManager.LoadScene(0); //Remember to change it to 0 when done
@@ -104,7 +100,16 @@ public class GameManager: MonoBehaviour
             
             _uiManager.FinishTutorial();
         }
-        //Debug.LogError(_redBallsLeft.Length);
+
+        if (Input.GetKeyDown("p"))
+        {
+            Time.timeScale = 0;            
+        }
+
+        if (Input.GetKeyDown("o"))
+        {
+            Time.timeScale = 1;
+        }
 
     }
 

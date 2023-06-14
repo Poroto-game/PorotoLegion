@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -25,6 +26,7 @@ public class Weapon : MonoBehaviour
     public Vector2 direction;
     public float ballForce = 20f;
     private GameManager _gameManager;
+    public MMFeedbacks weaponFeedback;
 
 
     void Start()
@@ -85,6 +87,7 @@ public class Weapon : MonoBehaviour
     _audioSource.Play();
     _gameManager.MinusAmmo(1);
     Instantiate(_gunExplosionFX,firePoint.position, firePoint.rotation);
+    weaponFeedback?.PlayFeedbacks();
     Gamepad.current.SetMotorSpeeds(0.7f, 0.7f);
     StartCoroutine(ResetRumble(0.1f));
     }

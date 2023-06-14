@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class BouncyPlatform : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private Player _player;
     private AudioSource _audioSource;
+    public MMFeedbacks platformWiggle;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +42,11 @@ public class BouncyPlatform : MonoBehaviour
             Gamepad.current.SetMotorSpeeds(0.7f, 0f);
             StartCoroutine(ResetRumble(0.2f));
         }
-        //else
-        //{
+
             _rigidBody = collision.rigidbody;
             _rigidBody.AddForce(_forceDirection * _forceMagnitude, ForceMode2D.Impulse);
             _audioSource.Play();
-        //}
+            platformWiggle?.PlayFeedbacks();
         
     }
 

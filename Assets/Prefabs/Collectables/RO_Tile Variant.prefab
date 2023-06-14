@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1634835132}
   - component: {fileID: 1634835133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,10 +105,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.094
       objectReference: {fileID: 0}
+    - target: {fileID: 7859632960290041875, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7859632960290041885, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: cf813ec5704b88b4ea2e291297867c79, type: 3}
+    - target: {fileID: 7859632961308665203, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632961312604203, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632961343198704, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632961357951558, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7859632961629463698, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -166,8 +186,24 @@ PrefabInstance:
       value: RO_Tile Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7859632961629463702, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632961629463702, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
       propertyPath: m_TagString
       value: RO_tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632961679854015, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632962175610519, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7859632962235992360, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7859632962235992362, guid: fa66d55de3f49bc43995572f415cae58, type: 3}
       propertyPath: m_Sprite
