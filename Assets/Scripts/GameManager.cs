@@ -50,6 +50,7 @@ public class GameManager: MonoBehaviour
         ammoPreReset = ammo;
         _currentScene = SceneManager.GetActiveScene().buildIndex;
 
+        if(_currentScene > 0)
         _player = GameObject.Find("Player").GetComponent<Player>();
     }
 
@@ -58,14 +59,12 @@ public class GameManager: MonoBehaviour
                 
         if(Input.GetKeyDown("r") || Input.GetKeyDown(KeyCode.JoystickButton1))
         {
-            ammo = ammoPreReset - 10;
-            SceneManager.LoadScene(_currentScene);     
+            RestartLevel();
         }
 
         if (Input.GetKeyDown("m") || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
-            //GameOver();
-            SceneManager.LoadScene(0);
+            GoToMainMenu();
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -101,15 +100,12 @@ public class GameManager: MonoBehaviour
             _uiManager.FinishTutorial();
         }
 
-        if (Input.GetKeyDown("p"))
+        if (Input.GetKeyDown("p") || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
-            Time.timeScale = 0;            
+            Time.timeScale = 0;
+            _uiManager.PauseMenu(true);
         }
 
-        if (Input.GetKeyDown("o"))
-        {
-            Time.timeScale = 1;
-        }
 
     }
 
@@ -127,6 +123,7 @@ public class GameManager: MonoBehaviour
     {
         _score += points;
         _uiManager.UpdateScoreUI(_score);
+        if(_currentScene > 3)
         _uiManager.AddPointsToCombo(points);
     }
 
@@ -193,6 +190,26 @@ public class GameManager: MonoBehaviour
         _player.horizontalDampingBasic = 0.3f;
         Debug.LogError("High Speed Activated");
         StartCoroutine(RestoreSpeed());
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        _uiManager.PauseMenu(false);
+    }
+
+    public void RestartLevel()
+    {
+        ammo = ammoPreReset - 10;
+        _currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(_currentScene);
+        Time.timeScale = 1;
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator CancelHighJump()

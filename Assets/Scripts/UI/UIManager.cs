@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     private GameObject _gameOver_popup;
     [SerializeField]
     private Slider _comboSlider;
+    [SerializeField]
+    private GameObject _pauseMenu;
     private int _currentScene;
     public int sliderRecoverSpeed = 15;
     public int comboAmmoGain = 3;
@@ -38,27 +40,31 @@ public class UIManager : MonoBehaviour
         _main_Menu_Button.gameObject.SetActive(false);
         //_gameOver_popup.gameObject.SetActive(false);
         _currentScene = SceneManager.GetActiveScene().buildIndex;
-        _comboSlider = GameObject.Find("Combo Slider").GetComponent<Slider>();
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        //_pauseMenu.transform.gameObject.SetActive(false);
 
 
-        if(_currentScene < 4)
-            _comboSlider.transform.gameObject.SetActive(false);
-        else
+        if (_currentScene > 3)
+        {
+            _comboSlider = GameObject.Find("Combo Slider").GetComponent<Slider>();
             _comboSlider.transform.gameObject.SetActive(true);
-
+           
+        }
 
     }
 
 
     private void Update()
     {
-        _comboSlider.value -= Time.deltaTime * sliderRecoverSpeed;
-
-        if(_comboSlider.value > 99)
+        if (_currentScene > 3)
         {
-            _gameManager.AddAmmo(comboAmmoGain);
-            _comboSlider.value = 0;
+            _comboSlider.value -= Time.deltaTime * sliderRecoverSpeed;
+
+            if (_comboSlider.value > 99)
+            {
+                _gameManager.AddAmmo(comboAmmoGain);
+                _comboSlider.value = 0;
+            }
         }
     }
 
@@ -87,6 +93,12 @@ public class UIManager : MonoBehaviour
     {
         _comboSlider.value += points;
     }
-    
 
+    public void PauseMenu(bool pause)
+    {
+        if (pause)
+        _pauseMenu.transform.gameObject.SetActive(true);
+        else
+            _pauseMenu.transform.gameObject.SetActive(false);
+    }
 }
